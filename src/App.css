@@ -1,42 +1,63 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/*color pallete: https://colorhunt.co/palette/d9dfc6eff3eafffdf0fff2c2*/
+
+body {
+  background-color: #FFFDF0;
+}
+
+header {
+  background-color: #D9DFC6;
+  padding: 20px 100px;
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  background-color: #D9DFC6;
+  font-size: 2.4rem;
+  font-family: 'Satisfy';
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+main {
+  display: grid;
+  grid-template-columns: 450px 800px;
+  margin: 20px 100px;
+  padding-top: 20px;
+  gap: 60px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.left-side {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .card {
-  padding: 2em;
+  background-color: #FFF2C2;
+  padding: 30px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.read-the-docs {
-  color: #888;
+.personal-details-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+input {
+  height: 40px;
+  border: none;
+  border-radius: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.right-side {
+  display: flex;
+  flex-direction: column;
+}
+
+.personal-details-render {
+  background-color: aqua;
 }
