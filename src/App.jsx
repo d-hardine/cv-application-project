@@ -1,25 +1,32 @@
 import { useState } from 'react'
 import viteLogo from '/vite.svg' //public folder
-import './App.css'
+import './styles/App.css'
 import Header from './components/Header'
 import PersonalDetails from './components/PersonalDetails'
 import PersonalDetailsRender from './components/PersonalDetailsRender'
-
+import EducationDetails from './components/EducationDetails'
+import ExperienceDetails from './components/ExperienceDetails'
 
 function App() {
+  const [dataDetails, setDataDetails] = useState({
+    firstName: 'Peter',
+    lastName: 'Parker',
+    email: 'not.spiderman@email.com',
+    phoneNumber: '555 90942',
+    address: '31st Mount Olympus, Mars'
+  })
 
-  const [firstName, setFirstName] = useState('John');
-  const [lastName, setLastName] = useState('Wick');
-  
   return (
     <>
       <Header />
       <main>
         <div className="left-side">
-          <PersonalDetails firstName={firstName} lastName={lastName} setFirstName={setFirstName} setLastName={setLastName}/>
+          <PersonalDetails dataDetails={dataDetails} setDataDetails={setDataDetails}/>
+          <EducationDetails />
+          <ExperienceDetails />
         </div>
         <div className="right-side">
-          <PersonalDetailsRender firstName={firstName} lastName={lastName}/>
+          <PersonalDetailsRender dataDetails={dataDetails}/>
         </div>
       </main>
     </>
