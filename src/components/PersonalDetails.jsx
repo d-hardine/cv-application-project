@@ -5,6 +5,31 @@ export default function PersonalDetails({dataDetails, setDataDetails}) {
         setDataDetails(updatedDataDetails)
     }
 
+    function clearForm(e) {
+        e.preventDefault()
+        const clearedDataDetails = {
+            ...dataDetails,
+                ['firstName']: '',
+                ['lastName']: '',
+                ['email']: '',
+                ['phoneNumber']: '',
+                ['address']: '',
+        }
+        setDataDetails(clearedDataDetails)
+    }
+
+    function sample(e) {
+        e.preventDefault()
+        const sampleDataDetails = {
+            firstName: 'Peter',
+            lastName: 'Parker',
+            email: 'not.spiderman@email.com',
+            phoneNumber: '555 90942',
+            address: '31st Mount Olympus, Mars'
+        }
+        setDataDetails(sampleDataDetails)
+    }
+
     return (
         <div className="card">
             <h2 className="heading">Personal Details</h2>
@@ -19,6 +44,10 @@ export default function PersonalDetails({dataDetails, setDataDetails}) {
                 <input type="tel" id="phone-number" name="phoneNumber" value={dataDetails.phoneNumber} onChange={handleChange}/>
                 <label htmlFor="address">Address</label>
                 <input type="text" id="address" name="address" value={dataDetails.address} onChange={handleChange}/>
+                <div className="buttons-container">
+                    <button onClick={clearForm}>Clear</button>
+                    <button onClick={sample}>Sample</button>
+                </div>
             </form>
         </div>
     )
