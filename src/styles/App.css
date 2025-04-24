@@ -43,6 +43,15 @@ main {
   justify-content: space-between;
 }
 
+img.none {
+  transition: transform 200ms;
+}
+
+img.flex {
+  transform: rotate(180deg);
+  transition: transform 200ms;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -70,6 +79,7 @@ button {
   border-radius: 20px;
   color: white;
   font-weight: bold;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .buttons-container {

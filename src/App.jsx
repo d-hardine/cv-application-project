@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import viteLogo from '/vite.svg' //public folder
 import './styles/App.css'
 import Header from './components/Header'
 import PersonalDetails from './components/PersonalDetails'
@@ -13,8 +12,16 @@ function App() {
     lastName: 'Parker',
     email: 'not.spiderman@email.com',
     phoneNumber: '555 90942',
-    address: '31st Mount Olympus, Mars'
+    address: '31st Mount Olympus, Mars',
   })
+
+  const [educationDetails, setEducationDetails] = useState([{
+    school: 'Nanyang Technological University',
+    degree: 'B.Sc in Electrical Engineering',
+    schoolLocation: 'Singapore',
+    schoolStartDate: '2014-04-20',
+    schoolEndDate: '2018-01-23',
+  }])
 
   return (
     <>
@@ -22,7 +29,7 @@ function App() {
       <main>
         <div className="left-side">
           <PersonalDetails dataDetails={dataDetails} setDataDetails={setDataDetails}/>
-          <EducationDetails />
+          <EducationDetails educationDetails={educationDetails} setEducationDetails={setEducationDetails}/>
           <ExperienceDetails />
         </div>
         <div className="right-side">
