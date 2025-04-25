@@ -43,13 +43,22 @@ main {
   justify-content: space-between;
 }
 
-img.none {
+img:hover {
+  cursor: pointer;
+}
+
+.chevron-image.not-expanded {
   transition: transform 200ms;
 }
 
-img.flex {
+.chevron-image.expanded {
   transform: rotate(180deg);
-  transition: transform 200ms;
+  transition: transform 150ms;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
 }
 
 form {
@@ -85,6 +94,16 @@ button {
 .buttons-container {
   display: flex;
   gap: 20px;
+}
+
+ul {
+  list-style: none;
+}
+
+.school-list {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
 }
 
 textarea {

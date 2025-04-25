@@ -18,7 +18,7 @@ export default function PersonalDetails({dataDetails, setDataDetails}) {
         setDataDetails(clearedDataDetails)
     }
 
-    function sample(e) {
+    function sampleHandler(e) {
         e.preventDefault()
         const sampleDataDetails = {
             firstName: 'Peter',
@@ -46,7 +46,7 @@ export default function PersonalDetails({dataDetails, setDataDetails}) {
                 <input type="text" id="address" name="address" value={dataDetails.address} onChange={handleChange}/>
                 <div className="buttons-container">
                     <button onClick={clearForm}>Clear</button>
-                    <button onClick={sample}>Sample</button>
+                    <button onClick={sampleHandler}>Sample</button>
                 </div>
             </form>
         </div>

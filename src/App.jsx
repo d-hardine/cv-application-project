@@ -15,13 +15,24 @@ function App() {
     address: '31st Mount Olympus, Mars',
   })
 
-  const [educationDetails, setEducationDetails] = useState([{
-    school: 'Nanyang Technological University',
-    degree: 'B.Sc in Electrical Engineering',
-    schoolLocation: 'Singapore',
-    schoolStartDate: '2014-04-20',
-    schoolEndDate: '2018-01-23',
-  }])
+  const [educationDetails, setEducationDetails] = useState([
+    {
+      school: 'Nanyang Technological University',
+      degree: 'B.Sc in Electrical Engineering',
+      schoolLocation: 'Singapore',
+      schoolStartDate: '2014-04-20',
+      schoolEndDate: '2018-01-23',
+      id: crypto.randomUUID()
+    },
+    {
+      school: 'Bandung Institute of Technology',
+      degree: 'M.Sc in Computer Science',
+      schoolLocation: 'Indonesia',
+      schoolStartDate: '2019-06-22',
+      schoolEndDate: '2021-04-13',
+      id: crypto.randomUUID()
+    }
+])
 
   return (
     <>
