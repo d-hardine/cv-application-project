@@ -5,7 +5,7 @@ export default function EducationDetails({educationDetails, setEducationDetails}
     const [isExpanded, setIsExpanded] = useState(false)
     const [newEntryFormIndex, setNewEntryFormIndex] = useState(0)
 
-    function isExpandedHandler() {
+    function isExpandedHandler() { //handle expand/shrink the education card
         setIsExpanded(!isExpanded)
     }
 
@@ -15,7 +15,7 @@ export default function EducationDetails({educationDetails, setEducationDetails}
         const degree = document.querySelector('#degree').value
         const schoolLocation = document.querySelector('#school-location').value
         const schoolStartDate = document.querySelector('#school-start-date').value
-        const schoolEndDate = document.querySelector('#school-start-date').value
+        const schoolEndDate = document.querySelector('#school-end-date').value
         const id = crypto.randomUUID()
 
         const newEducationDetails = {school, degree, schoolLocation, schoolStartDate, schoolEndDate, id}
@@ -65,9 +65,9 @@ export default function EducationDetails({educationDetails, setEducationDetails}
                         <ul>
                             {educationDetails.map((detail) => {
                                 return (
-                                    <li key={detail.id} className="school-list">
+                                    <li key={detail.id} className="content-list">
                                         {detail.school}
-                                        <img src="delete-outline.svg" alt="delete button" title="delete" width={30} onClick={() => deleteHandler(detail)}/>
+                                        <img className="delete-button" src="delete-outline.svg" alt="delete button" title="delete" width={30} onClick={() => deleteHandler(detail)}/>
                                     </li>
                                 )})}
                         </ul>

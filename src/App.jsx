@@ -4,6 +4,7 @@ import Header from './components/Header'
 import PersonalDetails from './components/PersonalDetails'
 import PersonalDetailsRender from './components/PersonalDetailsRender'
 import EducationDetails from './components/EducationDetails'
+import EducationDetailsRender from './components/EducationDetailsRender'
 import ExperienceDetails from './components/ExperienceDetails'
 
 function App() {
@@ -32,7 +33,28 @@ function App() {
       schoolEndDate: '2021-04-13',
       id: crypto.randomUUID()
     }
-])
+  ])
+
+  const [experienceDetails, setExperienceDetails] = useState([
+    {
+      companyName: "Stark Industries",
+      positionTitle: 'Software Developer Intern',
+      workLocation: 'Los Santos, SA',
+      workStartDate: '2022-02-05',
+      workEndDate: '2023-11-10',
+      jobDescription: 'Worked on frontend performance optimizations using React. Optimized React components to reduce re-renders, improving page load speed by 35% across the dashboard.',
+      id: crypto.randomUUID()
+    },
+    {
+      companyName: "Umbrella Corporation",
+      positionTitle: 'Junior Viral Scientist',
+      workLocation: 'Racoon City, CA',
+      workStartDate: '2023-06-05',
+      workEndDate: '2024-12-10',
+      jobDescription: 'Worked on frontend performance optimizations using React. Optimized React components to reduce re-renders, improving page load speed by 35% across the dashboard.',
+      id: crypto.randomUUID()
+    }
+  ])
 
   return (
     <>
@@ -41,10 +63,11 @@ function App() {
         <div className="left-side">
           <PersonalDetails dataDetails={dataDetails} setDataDetails={setDataDetails}/>
           <EducationDetails educationDetails={educationDetails} setEducationDetails={setEducationDetails}/>
-          <ExperienceDetails />
+          <ExperienceDetails experienceDetails={experienceDetails} setExperienceDetails={setExperienceDetails}/>
         </div>
         <div className="right-side">
           <PersonalDetailsRender dataDetails={dataDetails}/>
+          <EducationDetailsRender educationDetails={educationDetails}/>
         </div>
       </main>
     </>

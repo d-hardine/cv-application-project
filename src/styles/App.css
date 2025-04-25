@@ -91,6 +91,12 @@ button {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+button:hover {
+  background-color: darkblue;
+  cursor: pointer;
+  transition: background-color 200ms;
+}
+
 .buttons-container {
   display: flex;
   gap: 20px;
@@ -100,16 +106,18 @@ ul {
   list-style: none;
 }
 
-.school-list {
+.content-list {
   display: flex;
   justify-content: space-between;
   margin: 10px 0;
 }
 
 textarea {
+  padding: 20px;
   border: none;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  resize: none;
 }
 
 
