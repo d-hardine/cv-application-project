@@ -52,21 +52,22 @@ export default function EducationDetails({educationDetails, setEducationDetails}
             schoolEndDate: schoolEndDate.value,
         }
 
-        if(!isEditMode) {
+        if(!isEditMode) { //if edit mode is not active
             newEducationDetails.id = crypto.randomUUID()
 
             //add the new education details
             setEducationDetails([ 
                 ...educationDetails, newEducationDetails
             ])
-        } else {
+        } else { //if edit mode is active
             newEducationDetails.id = idCache
-            console.log(newEducationDetails)
 
-            //BERMASALAH COYYY
-            //setEducationDetails(educationDetails.map(detail => {
-            //    detail.id === idCache ? {...detail, ...newEducationDetails} : detail
-            //}))
+            //edit the picked details
+            setEducationDetails(
+                educationDetails.map((detail) =>
+                    detail.id === idCache ? { ...detail, ...newEducationDetails } : detail
+                )
+              )
         }
 
         e.target.reset() //clear the form

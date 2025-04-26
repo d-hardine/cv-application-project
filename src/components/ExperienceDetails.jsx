@@ -1,29 +1,77 @@
 import { useState } from "react"
+let idCache = '' //important, to save the would be edited detail id
 
 export default function ExperienceDetails({experienceDetails, setExperienceDetails}) {
 
     const [isExpanded, setIsExpanded] = useState(false)
     const [newEntryFormIndex, setNewEntryFormIndex] = useState(0)
+    const [isEditMode, setIsEditMode] = useState(false)
+
+    const companyName = document.querySelector('#company-name')
+    const positionTitle = document.querySelector('#position-title')
+    const workLocation = document.querySelector('#work-location')
+    const workStartDate = document.querySelector('#work-start-date')
+    const workEndDate = document.querySelector('#work-end-date')
+    const jobDescription = document.querySelector('#job-description')
 
     function isExpandedHandler() { //handle expand/shrink the education card
         setIsExpanded(!isExpanded)
     }
 
+    function showNewEntryFormHandler() {
+        setNewEntryFormIndex(1)
+        setIsEditMode(false)
+
+        companyName.value = ''
+        positionTitle.value = ''
+        workLocation.value = ''
+        workStartDate.value = ''
+        workEndDate.value = ''    }
+
+    function showEditFormHandler(detail) {
+        setNewEntryFormIndex(1)
+        setIsEditMode(true)
+
+        companyName.value = detail.companyName
+        positionTitle.value = detail.positionTitle
+        workLocation.value = detail.workLocation
+        workStartDate.value = detail.workStartDate
+        workEndDate.value = detail.workEndDate
+        jobDescription.value = detail.jobDescription
+
+        idCache = detail.id
+    }
+
     function submitHandler(e) {
         e.preventDefault()
-        const companyName = document.querySelector('#company-name').value
-        const positionTitle = document.querySelector('#position-title').value
-        const workLocation = document.querySelector('#work-location').value
-        const workStartDate = document.querySelector('#work-start-date').value
-        const workEndDate = document.querySelector('#work-end-date').value
-        const jobDescription = document.querySelector('#job-description').value
-        const id = crypto.randomUUID()
 
-        const newExperienceDetails = {companyName, positionTitle, workLocation, workStartDate, workEndDate, jobDescription, id}
+        const newExperienceDetails = {
+            companyName: companyName.value,
+            positionTitle: positionTitle.value,
+            workLocation: workLocation.value,
+            workStartDate: workStartDate.value,
+            workEndDate: workEndDate.value,
+            jobDescription: jobDescription.value,
+        }
 
-        setExperienceDetails([
-            ...experienceDetails, newExperienceDetails
-        ])
+        if(!isEditMode) { //if edit mode is not active
+            newExperienceDetails.id = crypto.randomUUID()
+
+            //add the new education details
+            setExperienceDetails([ 
+                ...experienceDetails, newExperienceDetails
+            ])
+        } else { //if edit mode is active
+            newExperienceDetails.id = idCache
+
+            //edit the picked details
+            setExperienceDetails(
+                experienceDetails.map((detail) =>
+                    detail.id === idCache ? { ...detail, ...newExperienceDetails } : detail
+                )
+              )
+        }
+
         e.target.reset() //clear the form
         setNewEntryFormIndex(0) //close the form
     }
@@ -70,13 +118,16 @@ export default function ExperienceDetails({experienceDetails, setExperienceDetai
                                 return (
                                     <li key={detail.id} className="content-list">
                                         {detail.companyName}
-                                        <img className="delete-button" src="delete-outline.svg" alt="delete button" title="delete" width={30} onClick={() => deleteHandler(detail)}/>
+                                        <div className="buttons-container">
+                                            <img className="edit-button" src="file-edit-outline.svg" alt="edit button" title="Edit" width={30} onClick={() => showEditFormHandler(detail)}/>
+                                            <img className="delete-button" src="delete-outline.svg" alt="delete button" title="Delete" width={30} onClick={() => deleteHandler(detail)}/>
+                                        </div>
                                     </li>
                                 )})}
                         </ul>
                         <div className="buttons-container">
-                            <button onClick={()=> {setNewEntryFormIndex(1)}}>New Entry</button>
-                            <button onClick={sampleHandler}>Sample</button>
+                            <button onClick={showNewEntryFormHandler}>New Entry</button>
+                            <button title="clear all all of the submitted details and fill it with sample experience details" onClick={sampleHandler}>Sample</button>
                         </div>
                     </div>
                     <form onSubmit={submitHandler} className="experience-details-form" style={newEntryFormIndex === 1 ? {display: 'flex'} : {display: 'none'}}>
@@ -100,7 +151,7 @@ export default function ExperienceDetails({experienceDetails, setExperienceDetai
                         <textarea name="job-description" id="job-description" rows={5} maxLength={400} required></textarea>
                         <div className="buttons-container">
                             <button type="reset">Reset</button>
-                            <button type="submit">Submit</button>
+                            <button type="submit">{isEditMode ? "Edit" : "Submit"}</button>
                             <button type="button" onClick={()=> {setNewEntryFormIndex(0)}}>Close</button>
                         </div>
                     </form>

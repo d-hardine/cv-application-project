@@ -3,11 +3,11 @@ export default function EducationDetailsRender({educationDetails}) {
         <div className="educaton-detail-rendered">
             {educationDetails.map((detail) => (
                 <div key={detail.id}>
-                    <div>{detail.school}</div>
-                    <div>{detail.degree}</div>
-                    <div>{detail.schoolLocation}</div>
-                    <div>{detail.schoolStartDate}</div>
-                    <div>{detail.schoolEndDate}</div>
+                    <h2>{detail.school}</h2>
+                    <h2>{detail.degree}</h2>
+                    <h2>{detail.schoolLocation}</h2>
+                    <h2>{detail.schoolStartDate}</h2>
+                    <h2>{detail.schoolEndDate}</h2>
                 </div>
             ))}
         </div>

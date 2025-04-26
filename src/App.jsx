@@ -6,6 +6,7 @@ import PersonalDetailsRender from './components/PersonalDetailsRender'
 import EducationDetails from './components/EducationDetails'
 import EducationDetailsRender from './components/EducationDetailsRender'
 import ExperienceDetails from './components/ExperienceDetails'
+import ExperienceDetailsRender from './components/ExperienceDetailsRender'
 
 function App() {
   const [dataDetails, setDataDetails] = useState({
@@ -42,7 +43,7 @@ function App() {
       workLocation: 'Los Santos, SA',
       workStartDate: '2022-02-05',
       workEndDate: '2023-11-10',
-      jobDescription: 'Worked on frontend performance optimizations using React. Optimized React components to reduce re-renders, improving page load speed by 35% across the dashboard.',
+      jobDescription: "Worked on frontend performance optimizations using React. Optimized React components to reduce re-renders, improving page load speed by 35% across the dashboard. I'm not Spider-Man by the way.",
       id: crypto.randomUUID()
     },
     {
@@ -68,6 +69,7 @@ function App() {
         <div className="right-side">
           <PersonalDetailsRender dataDetails={dataDetails}/>
           <EducationDetailsRender educationDetails={educationDetails}/>
+          <ExperienceDetailsRender experienceDetails={experienceDetails}/>
         </div>
       </main>
     </>
