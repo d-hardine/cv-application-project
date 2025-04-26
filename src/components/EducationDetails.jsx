@@ -1,28 +1,74 @@
 import { useState } from "react"
+let idCache = '' //important, to save the would be edited detail id
 
 export default function EducationDetails({educationDetails, setEducationDetails}) {
 
     const [isExpanded, setIsExpanded] = useState(false)
     const [newEntryFormIndex, setNewEntryFormIndex] = useState(0)
+    const [isEditMode, setIsEditMode] = useState(false)
+
+    const school = document.querySelector('#school')
+    const degree = document.querySelector('#degree')
+    const schoolLocation = document.querySelector('#school-location')
+    const schoolStartDate = document.querySelector('#school-start-date')
+    const schoolEndDate = document.querySelector('#school-end-date')
 
     function isExpandedHandler() { //handle expand/shrink the education card
         setIsExpanded(!isExpanded)
     }
 
-    function submitHandler(e) { //handle detail submission and add to the education details
+    function showNewEntryFormHandler() {
+        setNewEntryFormIndex(1)
+        setIsEditMode(false)
+
+        school.value = ''
+        degree.value = ''
+        schoolLocation.value = ''
+        schoolStartDate.value = ''
+        schoolEndDate.value = ''
+    }
+
+    function showEditFormHandler(detail) {
+        setNewEntryFormIndex(1)
+        setIsEditMode(true)
+
+        school.value = detail.school
+        degree.value = detail.degree
+        schoolLocation.value = detail.schoolLocation
+        schoolStartDate.value = detail.schoolStartDate
+        schoolEndDate.value = detail.schoolEndDate
+
+        idCache = detail.id
+    }
+
+
+    function submitHandler(e) { //handle detail submission
         e.preventDefault()
-        const school = document.querySelector('#school').value
-        const degree = document.querySelector('#degree').value
-        const schoolLocation = document.querySelector('#school-location').value
-        const schoolStartDate = document.querySelector('#school-start-date').value
-        const schoolEndDate = document.querySelector('#school-end-date').value
-        const id = crypto.randomUUID()
+        const newEducationDetails = {
+            school: school.value,
+            degree: degree.value,
+            schoolLocation: schoolLocation.value,
+            schoolStartDate: schoolStartDate.value,
+            schoolEndDate: schoolEndDate.value,
+        }
 
-        const newEducationDetails = {school, degree, schoolLocation, schoolStartDate, schoolEndDate, id}
+        if(!isEditMode) {
+            newEducationDetails.id = crypto.randomUUID()
 
-        setEducationDetails([
-            ...educationDetails, newEducationDetails
-        ])
+            //add the new education details
+            setEducationDetails([ 
+                ...educationDetails, newEducationDetails
+            ])
+        } else {
+            newEducationDetails.id = idCache
+            console.log(newEducationDetails)
+
+            //BERMASALAH COYYY
+            //setEducationDetails(educationDetails.map(detail => {
+            //    detail.id === idCache ? {...detail, ...newEducationDetails} : detail
+            //}))
+        }
+
         e.target.reset() //clear the form
         setNewEntryFormIndex(0) //close the form
     }
@@ -63,17 +109,20 @@ export default function EducationDetails({educationDetails, setEducationDetails}
                 <div className="content-container" style={isExpanded ? {display: 'flex'} : {display: 'none'}}>
                     <div className="data-container" style={newEntryFormIndex === 0 ? {display: 'block', flexDirection: 'column'} : {display: 'none'}}>
                         <ul>
-                            {educationDetails.map((detail) => {
+                            {educationDetails.map((educationDetail) => {
                                 return (
-                                    <li key={detail.id} className="content-list">
-                                        {detail.school}
-                                        <img className="delete-button" src="delete-outline.svg" alt="delete button" title="delete" width={30} onClick={() => deleteHandler(detail)}/>
+                                    <li key={educationDetail.id} className="content-list">
+                                        {educationDetail.school}
+                                        <div className="buttons-container">
+                                            <img className="edit-button" src="file-edit-outline.svg" alt="edit button" title="Edit" width={30} onClick={() => showEditFormHandler(educationDetail)}/>
+                                            <img className="delete-button" src="delete-outline.svg" alt="delete button" title="Delete" width={30} onClick={() => deleteHandler(educationDetail)}/>
+                                        </div>
                                     </li>
                                 )})}
                         </ul>
                         <div className="buttons-container">
-                            <button onClick={()=> {setNewEntryFormIndex(1)}}>New Entry</button>
-                            <button onClick={sampleHandler}>Sample</button>
+                            <button onClick={showNewEntryFormHandler}>New Entry</button>
+                            <button title="clear all all of the submitted details and fill it with sample education details" onClick={sampleHandler}>Sample</button>
                         </div>
                     </div>
                     <form onSubmit={submitHandler} className="education-details-form" style={newEntryFormIndex === 1 ? {display: 'flex'} : {display: 'none'}}>
@@ -95,7 +144,7 @@ export default function EducationDetails({educationDetails, setEducationDetails}
                         </div>
                         <div className="buttons-container">
                             <button type="reset">Reset</button>
-                            <button type="submit">Submit</button>
+                            <button type="submit">{isEditMode ? "Edit" : "Submit"}</button>
                             <button type="button" onClick={()=> {setNewEntryFormIndex(0)}}>Close</button>
                     </div>
                 </form>
