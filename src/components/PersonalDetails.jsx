@@ -1,4 +1,13 @@
+import { useState } from "react"
+
 export default function PersonalDetails({dataDetails, setDataDetails}) {
+
+    const [isExpanded, setIsExpanded] = useState(false)
+
+    function isExpandedHandler() { //handle expand/shrink the education card
+        setIsExpanded(!isExpanded)
+    }
+
     function handleChange(e) {
         const label = e.target.name
         const updatedDataDetails = {...dataDetails, [label]: e.target.value} //[label] is for dynamic label picker
@@ -32,8 +41,11 @@ export default function PersonalDetails({dataDetails, setDataDetails}) {
 
     return (
         <div className="card">
-            <h2 className="heading">Personal Details</h2>
-            <form className="personal-details-form">
+            <div className="heading-container">
+                <h2 className="heading">Personal Details</h2>
+                <img className={'chevron-image' + ' ' + (isExpanded ? 'expanded' : 'not-expanded')} src="chevron-down.svg" alt="chevron-down" title="click to expand/shrink" width={20} style={{transform: '180deg'}} onClick={isExpandedHandler}/>
+            </div>
+            <form className="personal-details-form" style={isExpanded ? {display: 'flex'} : {display: 'none'}}>
                 <label htmlFor="first-name">First Name</label>
                 <input type="text" id="first-name" name="firstName" value={dataDetails.firstName} onChange={handleChange}/>
                 <label htmlFor="last-name">Last Name</label>

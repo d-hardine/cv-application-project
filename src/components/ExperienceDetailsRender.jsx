@@ -1,14 +1,18 @@
 export default function ExperienceDetailsRender({experienceDetails}) {
     return (
-        <div className="experience-detail-rendered">
+        <div className="rendered-container">
+            <h2 className="rendered-title">Experience</h2>
             {experienceDetails.map((detail) => (
-                <div key={detail.id}>
-                    <div>{detail.companyName}</div>
-                    <div>{detail.positionTitle}</div>
-                    <div>{detail.workLocation}</div>
-                    <div>{detail.workStartDate}</div>
-                    <div>{detail.workEndDate}</div>
-                    <div>{detail.jobDescription}</div>
+                <div className="rendered-content" key={detail.id}>
+                    <div className="smaller-side">
+                        <div>{detail.workStartDate} - {detail.workEndDate}</div>
+                        <div>{detail.workLocation}</div>
+                    </div>
+                    <div className="larger-side">
+                        <div>{detail.companyName}</div>
+                        <div className="position-title-rendered">{detail.positionTitle}</div>
+                        <div>{detail.jobDescription}</div>
+                    </div>
                 </div>
             ))}
         </div>

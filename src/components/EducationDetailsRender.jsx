@@ -1,13 +1,17 @@
 export default function EducationDetailsRender({educationDetails}) {
     return (
-        <div className="educaton-detail-rendered">
+        <div className="rendered-container">
+            <h2 className="rendered-title">Education</h2>
             {educationDetails.map((detail) => (
-                <div key={detail.id}>
-                    <h2>{detail.school}</h2>
-                    <h2>{detail.degree}</h2>
-                    <h2>{detail.schoolLocation}</h2>
-                    <h2>{detail.schoolStartDate}</h2>
-                    <h2>{detail.schoolEndDate}</h2>
+                <div className="rendered-content" key={detail.id}>
+                    <div className="smaller-side">
+                        <div>{detail.schoolStartDate} - {detail.schoolEndDate}</div>
+                        <div>{detail.schoolLocation}</div>
+                    </div>
+                    <div className="larger-side">
+                        <div className="school-rendered-detail">{detail.school}</div>
+                        <div className="degree-rendered-detail">{detail.degree}</div>
+                    </div>
                 </div>
             ))}
         </div>

@@ -43,16 +43,16 @@ function App() {
       workLocation: 'Los Santos, SA',
       workStartDate: '2022-02-05',
       workEndDate: '2023-11-10',
-      jobDescription: "Worked on frontend performance optimizations using React. Optimized React components to reduce re-renders, improving page load speed by 35% across the dashboard. I'm not Spider-Man by the way.",
+      jobDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis iste laborum cum! Quidem aspernatur omnis neque assumenda vitae voluptatibus.",
       id: crypto.randomUUID()
     },
     {
       companyName: "Umbrella Corporation",
-      positionTitle: 'Junior Viral Scientist',
+      positionTitle: 'Junior Virologist',
       workLocation: 'Racoon City, CA',
       workStartDate: '2023-06-05',
       workEndDate: '2024-12-10',
-      jobDescription: 'Worked on frontend performance optimizations using React. Optimized React components to reduce re-renders, improving page load speed by 35% across the dashboard.',
+      jobDescription: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt veniam rem sunt aut quos quidem fugit qui dolor, culpa dolore eius commodi dolorum, illum amet omnis expedita quo explicabo mollitia?',
       id: crypto.randomUUID()
     }
   ])
